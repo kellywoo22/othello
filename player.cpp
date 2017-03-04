@@ -5,6 +5,7 @@
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish
  * within 30 seconds.
  */
+//this is a test comment
 Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
