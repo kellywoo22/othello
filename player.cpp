@@ -11,7 +11,7 @@ using namespace std;
  * within 30 seconds.
  */
 //this is a test comment
-Player::Player(Side side1) {
+Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
 
@@ -20,8 +20,18 @@ Player::Player(Side side1) {
      * precalculating things, etc.) However, remember that you will only have
      * 30 seconds.
      */
-     side = side1;
-     new_board = new Board();
+     AISide = side;
+     if (side == WHITE)
+     {
+        opponentSide = BLACK;
+     }
+     else
+     {
+        opponentSide = WHITE;
+     }
+
+
+     board = new Board();
 
 }
 
@@ -29,7 +39,7 @@ Player::Player(Side side1) {
  * Destructor for the player.
  */
 Player::~Player() {
-    delete new_board;
+    delete board;
 }
 
 /*
@@ -51,11 +61,14 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * process the opponent's opponents move before calculating your own move
      */
 
-     for (int i = 0; i < 8; i++) {
+    board->doMove(opponentsMove, opponentSide);
+
+    for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             Move *move = new Move(i, j);
-            if (new_board->checkMove(move, side)) 
+            if (board->checkMove(move, AISide)) 
                 {
+                    board->doMove(move, AISide);
                     return move;
                 }
         }
