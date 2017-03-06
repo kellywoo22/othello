@@ -21,7 +21,7 @@ Player::Player(Side side1) {
      * 30 seconds.
      */
      side = side1;
-     Board *board = new Board();
+     new_board = new Board();
 
 }
 
@@ -29,7 +29,7 @@ Player::Player(Side side1) {
  * Destructor for the player.
  */
 Player::~Player() {
-    delete board;
+    delete new_board;
 }
 
 /*
@@ -53,12 +53,13 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
      for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            Move move(i, j);
-            if (checkMove(&move, side)) 
+            Move *move = new Move(i, j);
+            if (new_board->checkMove(move, side)) 
                 {
-                    return &move;
+                    return move;
                 }
         }
     }
+    
     return nullptr;
 }
