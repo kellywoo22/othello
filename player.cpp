@@ -11,7 +11,7 @@ using namespace std;
  * within 30 seconds.
  */
 //this is a test comment
-Player::Player(Side side) {
+Player::Player(Side side1) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
 
@@ -20,12 +20,16 @@ Player::Player(Side side) {
      * precalculating things, etc.) However, remember that you will only have
      * 30 seconds.
      */
+     side = side1;
+     Board *board = new Board();
+
 }
 
 /*
  * Destructor for the player.
  */
 Player::~Player() {
+    delete board;
 }
 
 /*
@@ -47,6 +51,14 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * process the opponent's opponents move before calculating your own move
      */
 
-     cout << "hello world" << endl;
+     for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            Move move(i, j);
+            if (checkMove(&move, side)) 
+                {
+                    return &move;
+                }
+        }
+    }
     return nullptr;
 }
