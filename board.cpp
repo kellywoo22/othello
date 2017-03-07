@@ -166,8 +166,8 @@ int Board::scoreWhite() {
     int whiteScore = 0;
     int counter = 0;
     int cornerVal = 12;
-    int goodSideVal = 5;
-    int badSideVal = -5;
+    int goodSideVal = 7;
+    int badSideVal = -7;
     int badAdjCornerVal = -12;
     if (get(WHITE, 0, 0))
     {
