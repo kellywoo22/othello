@@ -509,15 +509,16 @@ int Board::scoreBlack() {
 
 
 int Board::score(Side side) {
+    int returnScore = scoreWhite() - scoreBlack();
     if (side == WHITE)
     {
         //return (countWhite() - countBlack());
-        return (scoreWhite() - scoreBlack());
+        return returnScore;
     }
     else
     {
         //return (countBlack() - countWhite());
-        return (scoreBlack() - scoreWhite());
+        return (-1*returnScore);
     }
 }
 
