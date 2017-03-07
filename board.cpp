@@ -162,15 +162,362 @@ int Board::countWhite() {
     return taken.count() - black.count();
 }
 
+int Board::scoreWhite() {
+    int whiteScore = 0;
+    int counter = 0;
+    int cornerVal = 12;
+    int goodSideVal = 5;
+    int badSideVal = -5;
+    int badAdjCornerVal = -12;
+    if (get(WHITE, 0, 0))
+    {
+        whiteScore += cornerVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 7))
+    {
+        whiteScore += cornerVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 0))
+    {
+        whiteScore += cornerVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 7))
+    {
+        whiteScore += cornerVal;
+        counter++;
+    }
+    if (get(WHITE, 2, 0))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 3, 0))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 4, 0))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 5, 0))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 2))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 3))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 4))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 5))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 2))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 3))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 4))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 5))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 2, 7))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 3, 7))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 4, 7))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 5, 7))
+    {
+        whiteScore += goodSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 1))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 1, 0))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 1))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 6, 0))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 0, 6))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 1, 7))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 7, 6))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 6, 7))
+    {
+        whiteScore += badSideVal;
+        counter++;
+    }
+    if (get(WHITE, 1, 1))
+    {
+        whiteScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(WHITE, 6, 1))
+    {
+        whiteScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(WHITE, 1, 6))
+    {
+        whiteScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(WHITE, 6, 6))
+    {
+        whiteScore += badAdjCornerVal;
+        counter++;
+    }
+    whiteScore += (countWhite() - counter);
+
+    return whiteScore;
+}
+
+
+int Board::scoreBlack() {
+    int blackScore = 0;
+    int counter = 0;
+    int cornerVal = 12;
+    int goodSideVal = 5;
+    int badSideVal = -5;
+    int badAdjCornerVal = -12;
+    if (get(BLACK, 0, 0))
+    {
+        blackScore += cornerVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 7))
+    {
+        blackScore += cornerVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 0))
+    {
+        blackScore += cornerVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 7))
+    {
+        blackScore += cornerVal;
+        counter++;
+    }
+    if (get(BLACK, 2, 0))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 3, 0))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 4, 0))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 5, 0))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 2))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 3))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 4))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 5))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 2))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 3))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 4))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 5))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 2, 7))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 3, 7))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 4, 7))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 5, 7))
+    {
+        blackScore += goodSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 1))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 1, 0))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 1))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 6, 0))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 0, 6))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 1, 7))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 7, 6))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 6, 7))
+    {
+        blackScore += badSideVal;
+        counter++;
+    }
+    if (get(BLACK, 1, 1))
+    {
+        blackScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(BLACK, 6, 1))
+    {
+        blackScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(BLACK, 1, 6))
+    {
+        blackScore += badAdjCornerVal;
+        counter++;
+    }
+    if (get(BLACK, 6, 6))
+    {
+        blackScore += badAdjCornerVal;
+        counter++;
+    }
+    blackScore += (countBlack() - counter);
+
+    return blackScore;
+}
+
 
 int Board::score(Side side) {
     if (side == WHITE)
     {
-        return (countWhite() - countBlack());
+        //return (countWhite() - countBlack());
+        return (scoreWhite() - scoreBlack());
     }
     else
     {
-        return (countBlack() - countWhite());
+        //return (countBlack() - countWhite());
+        return (scoreBlack() - scoreWhite());
     }
 }
 

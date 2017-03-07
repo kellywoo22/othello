@@ -61,64 +61,6 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      * process the opponent's opponents move before calculating your own move
      */
 
-     /*
-
-    board -> doMove( opponentsMove, opponentSide );
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) 
-        {
-            Move *move = new Move(i, j);
-            if (board->checkMove(move, AISide)) 
-            {
-                // Corner place
-                if ( (i == 0 && j == 7) || ( i == 0 && j == 0) || (i == 7 && j == 0) || ( i == 7 && j == 7 ) )
-                {
-                    board->doMove(move, AISide);
-                    return move;
-                } 
-                // Sides
-                else if ( ((i == 0) && ( 2 < j && j < 6 )) || ((i == 7) && ( 2 < j && j < 6 )) || ((j == 0) && ( 2 < i && i< 6 )) || ((j == 7 ) && ( 2 < i && i < 6 ))) 
-                {
-                    board->doMove(move, AISide);
-                    return move;
-                }
-                else if ( ((i == 1) && ( 2 < j && j< 6 )) || ((i == 6) && ( 2 < j && j< 6 )) || ((j == 1) && ( 2 < i && i < 6 )) || ((j == 6 ) && ( 2 < i && i< 6 )) || ( (2< i && i<6) &&  (2 < j && j < 6) ))
-                {
-                    board->doMove(move, AISide);
-                    return move;
-                }
-                else if (!( i == 1 && j == 6 ) || !(i == 6 && j == 1) || !(i == 6 && j == 6) || !(i == 1 && j == 1))
-                {
-                    board->doMove(move, AISide);
-                    return move;
-                }
-                else
-                {
-                    Board *boardCopy = board->copy();
-
-                    boardCopy->doMove(move, AISide);
-                    if (boardCopy->score(AISide) > bestScore)
-                    {
-                        bestScore = boardCopy->score(AISide);
-                        bestMove = move;
-                    }
-
-                    delete boardCopy;
-                    
-                }
-            }
-        }
-    }
-    
-    if (bestMove != nullptr)
-    {
-        board->doMove(bestMove, AISide);
-    }
-    return bestMove;
-
-    */
-
-
     board->doMove(opponentsMove, opponentSide);
 
     int bestScore = -9999;
