@@ -62,17 +62,39 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      */
 
     board->doMove(opponentsMove, opponentSide);
+
+
+    
+
+    int bestScore = -9999;
+    //int presentScore = board->score(AISide);
+    Move *bestMove = nullptr;
+
     
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             Move *move = new Move(i, j);
             if (board->checkMove(move, AISide)) 
                 {
-                    board->doMove(move, AISide);
-                    return move;
+                    Board *boardCopy = board->copy();
+
+                    boardCopy->doMove(move, AISide);
+                    if (boardCopy->score(AISide) > bestScore)
+                    {
+                        bestScore = boardCopy->score(AISide);
+                        bestMove = move;
+                    }
+
+                    delete boardCopy;
+                    
                 }
         }
     }
     
-    return nullptr;
+    if (bestMove != nullptr)
+    {
+        board->doMove(bestMove, AISide);
+    }
+    return bestMove;
+
 }
