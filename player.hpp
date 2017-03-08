@@ -9,12 +9,17 @@ using namespace std;
 class Player {
 
 public:
-	Side AISide;
+	Side aiSide;
 	Side opponentSide;
+	//int searchDepth;
+	//Side startSide;
 
     Player(Side side);
     ~Player();
     Board *board;
+
+    int minimax(Board *node, int depth, Side side);
+    Move *minimax(Board *node, int depth, bool maximizingPlayer);
     
 
     Move *doMove(Move *opponentsMove, int msLeft);
