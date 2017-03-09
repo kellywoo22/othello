@@ -109,7 +109,7 @@ int Player::minimax(Board *node, int depth, Side side) {
         }
     }
 
-    return node->score(side);
+    return node->score(aiSide);
 }
 
 
@@ -137,7 +137,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     board->doMove(opponentsMove, opponentSide);
 
-    int searchDepth = 3;
+    int searchDepth = 4;
 
     int bestScore = -9999;
     int temp = 0;
