@@ -71,8 +71,15 @@ bool Board::hasMoves(Side side) {
  * Returns true if a move is legal for the given side; false otherwise.
  */
 bool Board::checkMove(Move *m, Side side) {
+    
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
     // Passing is only legal if you have no moves.
-    if (m == nullptr) return !hasMoves(side);
+    if (m == nullptr) return !hasMoves(side); // can probably get rid of this line
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
     int X = m->getX();
     int Y = m->getY();
@@ -108,8 +115,16 @@ void Board::doMove(Move *m, Side side) {
     // A nullptr move means pass.
     if (m == nullptr) return;
 
+
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
     // Ignore if move is invalid.
-    if (!checkMove(m, side)) return;
+    if (!checkMove(m, side)) return; // can probably get rid of this line
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
 
     int X = m->getX();
     int Y = m->getY();
@@ -165,10 +180,10 @@ int Board::countWhite() {
 int Board::scoreWhite() {
     int whiteScore = 0;
     int counter = 0;
-    int cornerVal = 12;
-    int goodSideVal = 5;
-    int badSideVal = -5;
-    int badAdjCornerVal = -12;
+    int cornerVal = 9;
+    int goodSideVal = 4;
+    int badSideVal = -4;
+    int badAdjCornerVal = -9;
     if (get(WHITE, 0, 0))
     {
         whiteScore += cornerVal;
@@ -338,10 +353,10 @@ int Board::scoreWhite() {
 int Board::scoreBlack() {
     int blackScore = 0;
     int counter = 0;
-    int cornerVal = 12;
-    int goodSideVal = 5;
-    int badSideVal = -5;
-    int badAdjCornerVal = -12;
+    int cornerVal = 9;
+    int goodSideVal = 4;
+    int badSideVal = -4;
+    int badAdjCornerVal = -9;
     if (get(BLACK, 0, 0))
     {
         blackScore += cornerVal;

@@ -137,7 +137,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     board->doMove(opponentsMove, opponentSide);
 
-    int searchDepth = 4;
+    int searchDepth = 0;
 
     int bestScore = -9999;
     int temp = 0;
