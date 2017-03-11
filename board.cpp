@@ -72,14 +72,13 @@ bool Board::hasMoves(Side side) {
  */
 bool Board::checkMove(Move *m, Side side) {
     
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /*
     // Passing is only legal if you have no moves.
-    if (m == nullptr) return !hasMoves(side); // can probably get rid of this line
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    if (m == nullptr) 
+    {
+        return !hasMoves(side); // can probably get rid of this line
+    }
+    */
 
     int X = m->getX();
     int Y = m->getY();
@@ -116,14 +115,13 @@ void Board::doMove(Move *m, Side side) {
     if (m == nullptr) return;
 
 
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    /*
     // Ignore if move is invalid.
-    if (!checkMove(m, side)) return; // can probably get rid of this line
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+    if (!checkMove(m, side)) 
+    {
+        return; // can probably get rid of this line
+    }
+    */
 
 
     int X = m->getX();
