@@ -162,7 +162,7 @@ int Board::countWhite() {
     return taken.count() - black.count();
 }
 
-int Board::scoreWhite() {
+int Board::scoreWhite() { // Check significant squares and assign scores for these
     int whiteScore = 0;
     int counter = 0;
     int cornerVal = 12;
@@ -329,7 +329,7 @@ int Board::scoreWhite() {
         whiteScore += badAdjCornerVal;
         counter++;
     }
-    whiteScore += (countWhite() - counter);
+    whiteScore += (countWhite() - counter); // add a point for each square that is not a special case
 
     return whiteScore;
 }

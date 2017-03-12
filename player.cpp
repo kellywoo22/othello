@@ -55,19 +55,20 @@ int Player::minimax(Board *node, int depth, Side side) {
 
     if (side == aiSide) //maximizing player
     {
-        int bestVal = -9999;
-        int temp = 0;
-        for (int i = 0; i < 8; i++) {
+        int bestVal = -9999; // initialize to low score
+        int temp = 0; // holds score resulting from the potential move
+        for (int i = 0; i < 8; i++) { // loop through rows and columns
             for (int j = 0; j < 8; j++) {
-                Move prospectiveMove(i, j);
-                if (node->checkMove(&prospectiveMove, aiSide)) 
+                Move prospectiveMove(i, j); // declare possible move to make
+                if (node->checkMove(&prospectiveMove, aiSide)) // enter loop to see if this move is valid
                 {
-                    Board *tempBoard = node->copy();
-                    tempBoard->doMove(&prospectiveMove, aiSide);
+                    Board *tempBoard = node->copy(); // Create a temporary game board 
+                    tempBoard->doMove(&prospectiveMove, aiSide); // and make the possible move
 
-                    if ((temp = minimax(tempBoard, depth - 1, opponentSide)) > bestVal)
+                    if ((temp = minimax(tempBoard, depth - 1, opponentSide)) > bestVal) // keep checking board scores after making another move until depth is 0
+                    // get score and compare with previous best score
                     {
-                        bestVal = temp;
+                        bestVal = temp; // set new bestVal if score from move is greater than previous bestVal
                     }
 
                     delete tempBoard;
@@ -75,13 +76,13 @@ int Player::minimax(Board *node, int depth, Side side) {
             }
         }
 
-        if (bestVal != -9999)
+        if (bestVal != -9999) // if no prospective moves possible  
         {
             return bestVal;
         }
     }
     else //minimizing player (opponent)
-    {
+    {//opponent tries to minimize player's score when it's their turn
 
         int bestVal = 9999;
         int temp = 0;
@@ -95,7 +96,7 @@ int Player::minimax(Board *node, int depth, Side side) {
 
                     if ((temp = minimax(tempBoard, depth - 1, aiSide)) < bestVal)
                     {
-                        bestVal = temp;
+                        bestVal = temp; // player's minimized score due to opponent
                     }
 
                     delete tempBoard;
