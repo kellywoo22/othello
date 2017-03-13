@@ -175,6 +175,7 @@ int Board::countWhite() {
     return taken.count() - black.count();
 }
 
+
 int Board::scoreWhite() { // Check significant squares and assign scores for these
     int whiteScore = 0;
     int counter = 0;
@@ -351,10 +352,10 @@ int Board::scoreWhite() { // Check significant squares and assign scores for the
 int Board::scoreBlack() {
     int blackScore = 0;
     int counter = 0;
-    int cornerVal = 9;
-    int goodSideVal = 4;
-    int badSideVal = -4;
-    int badAdjCornerVal = -9;
+    int cornerVal = 12;
+    int goodSideVal = 5;
+    int badSideVal = -5;
+    int badAdjCornerVal = -12;
     if (get(BLACK, 0, 0))
     {
         blackScore += cornerVal;
@@ -534,6 +535,22 @@ int Board::score(Side side) {
         return (-1*returnScore);
     }
 }
+
+
+int Board::scoreEnd(Side side) {
+
+    int returnScore = countWhite() - countBlack();
+    if (side == WHITE)
+    {
+        return returnScore;
+    }
+    else
+    {
+        return -1*returnScore;
+    }
+}
+
+
 
 /*
  * Sets the board state given an 8x8 char array where 'w' indicates a white

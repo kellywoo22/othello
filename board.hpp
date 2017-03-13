@@ -18,6 +18,7 @@ private:
     bool onBoard(int x, int y);
 
 public:
+
     Board();
     ~Board();
     Board *copy();
@@ -30,6 +31,7 @@ public:
     int countBlack();
     int countWhite();
     int score(Side side);
+    int scoreEnd(Side side);
     int scoreWhite();
     int scoreBlack();
 

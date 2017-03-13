@@ -1,7 +1,10 @@
 #include "player.hpp"
 
 #include <iostream>
+#include <unordered_map>
 using namespace std;
+
+#define ENDGAME 26
 
 // This is the file for player
 
@@ -20,22 +23,21 @@ Player::Player(Side side) {
      * precalculating things, etc.) However, remember that you will only have
      * 30 seconds.
      */
-     aiSide = side;
-     if (side == WHITE)
-     {
-        opponentSide = BLACK;
-     }
-     else
-     {
-        opponentSide = WHITE;
-     }
+    aiSide = side;
+    if (side == WHITE)
+    {
+       opponentSide = BLACK;
+    }
+    else
+    {
+       opponentSide = WHITE;
+    }
 
+    turn = 0;
 
-
-
-     board = new Board();
-
+    board = new Board();
 }
+
 
 /*
  * Destructor for the player.
@@ -50,7 +52,14 @@ int Player::minimax(Board *node, int depth, Side side) {
 
     if (depth == 0)
     {
-        return node->score(aiSide);
+        if (turn <= ENDGAME)
+        {
+            return node->score(aiSide);
+        }
+        else
+        {
+            return node->scoreEnd(aiSide);
+        }
     }
 
     if (side == aiSide) //maximizing player
@@ -109,9 +118,150 @@ int Player::minimax(Board *node, int depth, Side side) {
             return bestVal;
         }
     }
-
-    return node->score(aiSide);
+    if (turn <= ENDGAME)
+    {
+        return node->score(aiSide);
+    }
+    else
+    {
+        return node->scoreEnd(aiSide);
+    }
 }
+
+
+int Player::negamax_ab(Board *node, int depth, int alpha, int beta, Side side) {
+
+    if (depth == 0)
+    {
+        if (side == aiSide)
+        {
+            if (turn <= ENDGAME)
+            {
+                return node->score(aiSide);
+            }
+            else
+            {
+                return node->scoreEnd(aiSide);
+            }
+        }
+        else
+        {
+            if (turn <= ENDGAME)
+            {
+                return node->score(opponentSide); 
+            }
+            else
+            {
+                return node->scoreEnd(opponentSide); 
+            }
+        }
+    }
+
+    int bestVal = -9999;
+    int temp = 0;
+    int a = alpha;
+    int b = beta;
+
+
+    if (side == aiSide)
+    {
+        for (int i = 0; i < 8; i++) { 
+            for (int j = 0; j < 8; j++) {
+                Move prospectiveMove(i, j); 
+                if (node->checkMove(&prospectiveMove, aiSide)) 
+                {
+                    Board *tempBoard = node->copy(); 
+                    tempBoard->doMove(&prospectiveMove, aiSide);
+                    
+                    temp = -1 * negamax_ab(tempBoard, depth - 1, -1*b, -1*a, opponentSide);
+                    if (temp > bestVal)
+                    {
+                        bestVal = temp; 
+                    }
+                    if (temp >= a)
+                    {
+                        a = temp;
+                    }
+                    if (a >= b)
+                    {
+                        delete tempBoard;
+                        return bestVal; //cutoff
+                    }
+                    delete tempBoard;
+                }
+            }
+        }
+        
+        if (bestVal != -9999)
+        {
+            return bestVal;
+        }
+        
+    }
+    else
+    {
+        for (int i = 0; i < 8; i++) { 
+            for (int j = 0; j < 8; j++) {
+                Move prospectiveMove(i, j); 
+                if (node->checkMove(&prospectiveMove, opponentSide)) 
+                {
+                    Board *tempBoard = node->copy(); 
+                    tempBoard->doMove(&prospectiveMove, opponentSide);
+
+                    
+                    temp = -1 * negamax_ab(tempBoard, depth - 1, -1*b, -1*a, aiSide);
+                    if (temp > bestVal)
+                    {
+                        bestVal = temp; 
+                    }
+                    if (temp >= a)
+                    {
+                        a = temp;
+                    }
+                    if (a >= b)
+                    {
+                        delete tempBoard;
+                        return bestVal; //cutoff
+                    }
+                    delete tempBoard;
+
+                }
+            }
+        }
+        
+        if (bestVal != -9999)
+        {
+            return bestVal;
+        }
+        
+    }
+
+    if (side == aiSide)
+    {
+        if (turn <= ENDGAME)
+        {
+            return node->score(aiSide);
+        }
+        else
+        {
+            return node->scoreEnd(aiSide);
+        }
+    }
+    else
+    {
+        if (turn <= ENDGAME)
+        {
+            return node->score(opponentSide); 
+        }
+        else
+        {
+            return node->scoreEnd(opponentSide); 
+        }
+    }
+    
+
+}
+
 
 
 
@@ -138,10 +288,12 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     board->doMove(opponentsMove, opponentSide);
 
-    int searchDepth = 4;
+    int searchDepth = 8;
 
     int bestScore = -9999;
     int temp = 0;
+    int a = -9999;
+    int b = 9999;
     Move *bestMove = nullptr;
 
     
@@ -153,18 +305,37 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
             {
                 Board *boardCopy = board->copy();
                 boardCopy->doMove(move, aiSide);
-
+                
+                /*
+                //minimax strategy 
                 if ((temp = minimax(boardCopy, searchDepth, opponentSide)) > bestScore)
                 {
                     bestScore = temp;
                     bestMove = move;
                 }
+                */
+                
+                
+                //negamax strategy with alpha beta pruning
+                temp = -1 * negamax_ab(boardCopy, searchDepth, -1*b, -1*a, opponentSide);
+                if (temp > bestScore)
+                {
+                    bestScore = temp;
+                    bestMove = move;
+                }
+                if (temp >= a)
+                {
+                    a = temp;
+                }
+                
+
                 delete boardCopy;
             }
         }
     }
 
-
+    turn++;
+    cerr << "turn: " << turn << endl;
     board->doMove(bestMove, aiSide);
     return bestMove;
 
